@@ -10,9 +10,8 @@ def main():
     engine = EdgeCaseEngine()
 
     handlers = [
-        IntegerHandler(),
         FloatHandler(),
-        StringHandler()
+        FloatHandler()
     ]
 
     edge_cases = engine.generate(handlers)

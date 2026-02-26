@@ -1,17 +1,22 @@
+from edge_case_engine.combinatorial import CombinatorialGenerator
+
+
 class EdgeCaseEngine:
 
     def __init__(self):
 
-        pass
+        self.combinatorial = CombinatorialGenerator()
 
     def generate(self, handlers):
 
-        all_cases = []
+        handler_cases = []
 
         for handler in handlers:
 
             cases = handler.generate_edge_cases()
 
-            all_cases.extend(cases)
+            handler_cases.append(cases)
 
-        return all_cases
+        combinations = self.combinatorial.generate(handler_cases)
+
+        return combinations
