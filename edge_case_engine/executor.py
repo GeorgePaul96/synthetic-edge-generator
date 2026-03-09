@@ -1,36 +1,55 @@
+from edge_case_engine.path_tracker import PathTracker
+
+
+class ExecutionResult:
+
+    def __init__(self, input_data, error, severity, coverage_id, new_path):
+        self.input = input_data
+        self.error = error
+        self.severity = severity
+        self.coverage_id = coverage_id
+        self.new_path = new_path
+
+
 class FunctionExecutor:
 
-    def __init__(self, function):
+    def __init__(self):
 
-        self.function = function
+        self.tracker = PathTracker()
 
-        self.crashes = []
+    def execute(self, func, test_cases):
 
-    def execute(self, test_cases):
-
-        print(f"\nTesting function: {self.function.__name__}\n")
+        results = []
 
         for case in test_cases:
 
-            try:
+            self.tracker.start()
 
-                self.function(*case)
+            error = None
+            severity = "INFO"
+
+            try:
+                func(*case)
 
             except Exception as e:
+                error = e
+                severity = "HIGH"
 
-                crash = {
-                    "input": case,
-                    "error": type(e).__name__,
-                    "message": str(e)
-                }
+            finally:
+                self.tracker.stop()
 
-                self.crashes.append(crash)
+            coverage_id = self.tracker.compute_path_id()
 
-                print("Crash found!")
-                print(f"Input: {case}")
-                print(f"Error: {type(e).__name__}")
-                print()
+            new_path = self.tracker.is_new_path(coverage_id)
 
-        print("Testing complete.")
+            results.append(
+                ExecutionResult(
+                    case,
+                    error,
+                    severity,
+                    coverage_id,
+                    new_path
+                )
+            )
 
-        return self.crashes
+        return results
