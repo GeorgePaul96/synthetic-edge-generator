@@ -14,7 +14,8 @@ class FuzzContract:
 
 def fuzz_contract(allowed_exceptions=()):
     def decorator(func):
-        func._fuzz_contract = FuzzContract(
+        # FIX: Changed from _fuzz_contract to __fuzz_contract__
+        func.__fuzz_contract__ = FuzzContract(
             allowed_exceptions=allowed_exceptions
         )
         return func

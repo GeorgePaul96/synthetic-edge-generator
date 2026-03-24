@@ -1,0 +1,5314 @@
+[
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "0"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "integer"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -1
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      1
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      9223372036854775808
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775808
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      4294967296
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      65536
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "integer"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775808
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      2147483647
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775807
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "can only concatenate str (not \"float\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775809
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      null
+    ],
+    "error": "can only concatenate str (not \"NoneType\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      4294967296
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      9223372036854775807
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -9223372036854775809
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775807
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775807
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      18446744073709551616
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      9223372036854775808
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      4294967296
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775809
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      256
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "0"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775809
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      9223372036854775807
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      65536
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      4294967296
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -2147483648
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      256
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775807
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      null
+    ],
+    "error": "can only concatenate str (not \"NoneType\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'int' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "integer"
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      18446744073709551616
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      256
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775808
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      256
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775807
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -2147483648
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -0.0,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      4294967296
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775807
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "0"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775809
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      256
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "0"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775809
+    ],
+    "error": "unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'str'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      65536
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "can only concatenate str (not \"int\") to str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "unsupported operand type(s) for +: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      4294967296
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775809
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      4294967296
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      18446744073709551616
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -2147483648
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      65536
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -9223372036854775809
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775807
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      4294967296
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      65536
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      null
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775807
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      65536
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      9223372036854775808
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      4294967296
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      1e+308
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      9223372036854775807
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      18446744073709551616
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      18446744073709551616
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      18446744073709551616
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      NaN
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      256
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      65536
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      18446744073709551616
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775809
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775809
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775807
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      2147483647
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -0.0,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -2147483648
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "0"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775808
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775808
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      65536
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      256
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775808
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775808
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      1
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      true
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      4294967296
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "integer"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      4294967296
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      65536
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is not finite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "integer"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "integer"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      "string"
+    ],
+    "error": "Numerator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "0"
+    ],
+    "error": "Denominator must be numeric",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Division by zero or near zero",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      256
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      18446744073709551616
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      null
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      18446744073709551616
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      4294967296
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      null
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775809
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      9223372036854775808
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -9223372036854775808
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -9223372036854775808
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      18446744073709551616
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'int' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      9223372036854775807
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775809
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      256
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'int' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -9223372036854775809
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "cannot fit 'int' into an index-sized integer",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      256
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      4294967296
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      2147483647
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      1e+308
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -1
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      Infinity
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1.0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775807
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      1e+308
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "0"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      65536
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      18446744073709551616
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -1
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      0
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      1e+308
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      NaN
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      -1
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      18446744073709551616
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "integer"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      18446744073709551616
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      true
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      NaN
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -1
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -2147483648
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      NaN
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      256
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'int' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      4294967296
+    ],
+    "error": "",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      Infinity
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      4294967296
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "0"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0,
+      "string"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      1e+308
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1.7976931348623157e+308,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      "integer"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      2147483647
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      false
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      -1
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -1,
+      "0"
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      "string"
+    ],
+    "error": "can't multiply sequence by non-int of type 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      -2147483648
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      NaN
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -2147483648
+    ],
+    "error": "must be real number, not str",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      0.0,
+      null
+    ],
+    "error": "unsupported operand type(s) for *: 'float' and 'NoneType'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      2.2250738585072014e-308,
+      Infinity
+    ],
+    "error": "Result is infinite",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      -Infinity,
+      0
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      Infinity
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN,
+      9223372036854775808
+    ],
+    "error": "Result is NaN",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      1e+308,
+      "0"
+    ],
+    "error": "can't multiply sequence by non-int of type 'float'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      null,
+      0
+    ],
+    "error": "unsupported operand type(s) for *: 'NoneType' and 'int'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string",
+      -9223372036854775809
+    ],
+    "error": "cannot fit 'int' into an index-sized integer",
+    "severity": "HIGH"
+  }
+]

@@ -75,22 +75,20 @@ class CorpusManager:
 
         return new_cases
 
-    def add_interesting_input(self, test_input, coverage_id):
+    def add_interesting_input(self, test_input, coverage_id, energy=1.0, exec_time_ms=0.0):
 
         entry = {
             "input": test_input,
-            "coverage_id": coverage_id
+            "coverage_id": coverage_id,
+            "energy": energy,
+            "exec_time_ms": exec_time_ms
         }
-
+    
         self.interesting_inputs.append(entry)
 
-    def get_interesting_input(self):
-
-        if self.interesting_inputs:
-            return random.choice(self.interesting_inputs)["input"]
-
-        return None
-
+    def get_all_interesting_inputs(self):
+        return self.interesting_inputs
+    
     def record_crash(self, test_input, error, severity):
 
         crash_record = {
