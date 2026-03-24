@@ -10,11 +10,14 @@ class ExecutionResult:
         self.coverage_id = coverage_id
         self.new_path = new_path
 
+    def __repr__(self):
+        return f"<ExecutionResult input={self.input} error={self.error} severity={self.severity} new_path={self.new_path}>"
+
+
 
 class FunctionExecutor:
 
     def __init__(self):
-
         self.tracker = PathTracker()
 
     def execute(self, func, test_cases):
@@ -39,7 +42,6 @@ class FunctionExecutor:
                 self.tracker.stop()
 
             coverage_id = self.tracker.compute_path_id()
-
             new_path = self.tracker.is_new_path(coverage_id)
 
             results.append(

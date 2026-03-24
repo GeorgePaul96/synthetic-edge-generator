@@ -7,17 +7,19 @@ import operations
 from type_handlers.float_handler import FloatHandler
 from type_handlers.integer_handler import IntegerHandler
 
-
+print("FILE EXECUTING")
 def main():
-
+    print("MAIN STARTED")
     engine = EdgeCaseEngine()
     executor = FunctionExecutor()
     corpus = CorpusManager()
 
     targets = TargetDiscovery.discover_modules([operations])
 
-    for target in targets:
+    max_iterations = 300
 
+    for target in targets:
+        print(f"Discovered targets: {targets}")
         print(f"\nFuzzing target: {target.name}")
 
         handlers = [
@@ -25,28 +27,55 @@ def main():
             IntegerHandler(),
         ]
 
+        # Step 1: Initial seed generation
         test_cases = engine.generate(handlers)
-
-        # Deduplicate via corpus
         unique_cases = corpus.add_inputs(test_cases)
 
-        print(f"Generated: {len(test_cases)}")
-        print(f"Unique new cases: {len(unique_cases)}")
+        # Add seeds to interesting pool
+        for case in unique_cases:
+            corpus.add_interesting_input(case, "seed")
 
-        results = executor.execute(target.function, unique_cases)
+        iteration = 0
 
-        for result in results:
-            if result.new_path:
-                print("New path discovered!")
-            if result.error is not None:    
-                corpus.record_crash(
-                    result.input,
-                    str(result.error),
-                    result.severity
-                )
+        while iteration < max_iterations:
 
-        print(f"Crashes recorded: {len(corpus.load_crashes())}")
+            seed_input = corpus.get_interesting_input()
+
+            if seed_input is None:
+                break
+
+            # Step 2: Mutate seed
+            mutated_cases = engine.mutation_engine.mutate(seed_input)
+
+            if not isinstance(mutated_cases, list):
+                mutated_cases = [mutated_cases]
+
+            # Step 3: Execute
+            results = executor.execute(target.function, mutated_cases)
+
+            for result in results:
+
+                # Step 4: Learn from coverage
+                if result.new_path:
+                    corpus.add_interesting_input(
+                        result.input,
+                        result.coverage_id
+                    )
+                    print("New path discovered!")
+
+                # Step 5: Record crashes
+                if result.error is not None:
+                    corpus.record_crash(
+                        result.input,
+                        str(result.error),
+                        result.severity
+                    )
+                    print("Crash detected!")
+
+            iteration += 1
+        print(f"Discovered targets: {targets}")
+        print(f"Completed {iteration} iterations")
 
 
-if __name__ == "__main__":
-    main()
+
+main()
