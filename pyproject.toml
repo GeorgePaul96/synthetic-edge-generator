@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "synthedge"
+version = "0.1.0"
+description = "Automatically find inputs that break your Python functions"
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.scripts]
+synthedge = "synthedge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["synthedge*", "edge_case_engine*", "type_handlers*"]
