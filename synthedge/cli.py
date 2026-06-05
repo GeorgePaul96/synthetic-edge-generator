@@ -1,5 +1,6 @@
 import argparse
 import importlib.util
+import os
 import sys
 import types
 import typing
@@ -18,7 +19,8 @@ def load_module_from_path(path: str) -> types.ModuleType:
     if spec is None or spec.loader is None:
         raise ValueError(f"Cannot load module from: {path}")
     module = importlib.util.module_from_spec(spec)
-    sys.modules["_synthedge_target"] = module
+    module_key = f"_synthedge_target_{os.path.abspath(path)}"
+    sys.modules[module_key] = module
     spec.loader.exec_module(module)
     return module
 
@@ -36,9 +38,12 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
         print("Tip: decorate your functions with @fuzz_contract from edge_case_engine.contracts")
         return {}
 
+    module_abs = os.path.abspath(module_path)
+    module_dir = os.path.dirname(module_abs)
+
     engine = EdgeCaseEngine()
     executor = FunctionExecutor()
-    corpus = CorpusManager()
+    corpus = CorpusManager(corpus_dir=os.path.join(module_dir, "corpus"))
     scheduler = PowerScheduler()
     summary = {}
 
@@ -59,7 +64,14 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
         for case in unique_cases:
             corpus.add_interesting_input(case, coverage_id="seed")
 
+        # If no new unique cases (corpus already seen them all), re-seed from all
+        # generated cases so the fuzzer pool is never empty.
+        if not corpus.get_all_interesting_inputs():
+            for case in test_cases:
+                corpus.add_interesting_input(case, coverage_id="seed")
+
         crashes_found = 0
+        iterations_done = 0
 
         for i in range(iterations):
             interesting_pool = corpus.get_all_interesting_inputs()
@@ -87,12 +99,14 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
                     corpus.record_crash(result.input, str(result.error), result.severity)
                     crashes_found += 1
 
-        summary[target.name] = {"iterations": i + 1, "crashes_found": crashes_found}
+            iterations_done = i + 1
+
+        summary[target.name] = {"iterations": iterations_done, "crashes_found": crashes_found}
 
     return summary
 
 
-def print_summary(summary: dict) -> None:
+def print_summary(summary: dict, corpus_path: str = "corpus/crashes.json") -> None:
     print("\n" + "=" * 50)
     print("SYNTHEDGE RESULTS")
     print("=" * 50)
@@ -107,7 +121,7 @@ def print_summary(summary: dict) -> None:
     if total_crashes == 0:
         print("  No unexpected crashes found. Your functions handled all edge cases.")
     else:
-        print(f"  See corpus/crashes.json for details.")
+        print(f"  See {corpus_path} for details.")
 
 
 def main():
@@ -124,9 +138,18 @@ def main():
     args = parser.parse_args()
 
     print(f"synthedge v0.1.0 — fuzzing {args.module}")
-    summary = run_fuzzer(args.module, iterations=args.iterations, verbose=args.verbose)
+    try:
+        summary = run_fuzzer(args.module, iterations=args.iterations, verbose=args.verbose)
+    except (FileNotFoundError, ValueError) as e:
+        sys.exit(f"Error: {e}")
+    except (ImportError, Exception) as e:
+        sys.exit(f"Error loading module: {e}")
+
     if summary:
-        print_summary(summary)
+        corpus_path = os.path.join(
+            os.path.dirname(os.path.abspath(args.module)), "corpus", "crashes.json"
+        )
+        print_summary(summary, corpus_path=corpus_path)
 
 
 if __name__ == "__main__":
