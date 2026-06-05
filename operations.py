@@ -48,3 +48,14 @@ def multiply(a: float, b: float):
         raise ValueError("Result is infinite")
 
     return result
+
+
+@fuzz_contract(allowed_exceptions=(ValueError, TypeError))
+def format_ratio(numerator: float, label: str) -> str:
+    """Format a ratio with a label."""
+    if not isinstance(numerator, (int, float)):
+        raise TypeError("numerator must be numeric")
+    if not isinstance(label, str):
+        raise TypeError("label must be a string")
+    ratio = numerator / 100.0
+    return f"{label}: {ratio:.2%}"

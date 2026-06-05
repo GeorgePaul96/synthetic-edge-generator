@@ -21,35 +21,25 @@ class StringHandler:
             # Empty / whitespace
             "",
             " ",
-            "\t",
             "\n",
-            "\r\n",
+            "\t",
 
-            # Null byte
-            "\0",
-
-            # Unicode
-            "🔥",
-            "∞",
-            "你好",
-            "𠜎",
-
-            # Long strings
-            "A" * 10,
-            "A" * 100,
-            "A" * 1000,
+            # Long string
+            "a" * 1000,
 
             # Numeric strings
             "0",
             "-1",
-            "1.0",
+
+            # Special string values
+            "None",
+
+            # Null byte
+            "\x00",
+
+            # Unicode
+            "café",
 
             # Injection patterns
-            "' OR 1=1 --",
-            "<script>alert(1)</script>",
-
-            # Invalid types
-            None,
-            123,
-            True,
+            "<script>",
         ]

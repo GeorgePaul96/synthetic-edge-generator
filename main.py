@@ -1,19 +1,21 @@
+import typing
+
 from edge_case_engine.engine import EdgeCaseEngine
 from edge_case_engine.executor import FunctionExecutor
 from edge_case_engine.discovery import TargetDiscovery
 from edge_case_engine.corpus import CorpusManager
-from edge_case_engine.scheduler import PowerScheduler # NEW IMPORT
+from edge_case_engine.scheduler import PowerScheduler
+from type_handlers.registry import HandlerRegistry
 
 import operations
-from type_handlers.float_handler import FloatHandler
-from type_handlers.integer_handler import IntegerHandler
+
 
 def main():
     print("MAIN STARTED")
     engine = EdgeCaseEngine()
     executor = FunctionExecutor()
     corpus = CorpusManager()
-    scheduler = PowerScheduler() # NEW INSTANCE
+    scheduler = PowerScheduler()
 
     targets = TargetDiscovery.discover_modules([operations])
     max_iterations = 300
@@ -21,7 +23,13 @@ def main():
     for target in targets:
         print(f"\nFuzzing target: {target.name}")
 
-        handlers = [FloatHandler(), IntegerHandler()]
+        annotations = {}
+        try:
+            annotations = typing.get_type_hints(target.function)
+        except Exception:
+            pass
+
+        handlers = HandlerRegistry.handlers_for_params(target.parameters, annotations)
 
         # Step 1: Initial seed generation
         test_cases = engine.generate(handlers)
