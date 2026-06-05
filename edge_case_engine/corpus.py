@@ -98,3 +98,18 @@ class CorpusManager:
         }
 
         self._append_json(self.crashes_file, crash_record)
+
+    def get_crashes(self) -> list:
+        """Return all recorded crashes from disk."""
+        if not os.path.exists(self.crashes_file):
+            return []
+        with open(self.crashes_file, "r") as f:
+            try:
+                return json.load(f)
+            except json.JSONDecodeError:
+                return []
+
+    def write_deduplicated_crashes(self, crashes: list) -> None:
+        """Overwrite crashes.json with the given (deduplicated) list."""
+        with open(self.crashes_file, "w") as f:
+            json.dump(crashes, f, indent=2, default=str)

@@ -10,6 +10,7 @@ from edge_case_engine.executor import FunctionExecutor
 from edge_case_engine.discovery import TargetDiscovery
 from edge_case_engine.corpus import CorpusManager
 from edge_case_engine.scheduler import PowerScheduler
+from edge_case_engine.deduplicator import CrashDeduplicator
 from type_handlers.registry import HandlerRegistry
 
 
@@ -102,6 +103,13 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
             iterations_done = i + 1
 
         summary[target.name] = {"iterations": iterations_done, "crashes_found": crashes_found}
+
+    # Deduplication pass — collapse identical crashes to their minimal representative
+    raw_crashes = corpus.get_crashes()
+    if raw_crashes:
+        deduped = CrashDeduplicator.deduplicate(raw_crashes)
+        corpus.write_deduplicated_crashes(deduped)
+        print(f"\nDeduplication: {len(raw_crashes)} crashes → {len(deduped)} unique")
 
     return summary
 
