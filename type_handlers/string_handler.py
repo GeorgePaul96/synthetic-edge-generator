@@ -23,6 +23,7 @@ class StringHandler:
             " ",
             "\n",
             "\t",
+            "\r\n",
 
             # Long string
             "a" * 1000,
@@ -39,6 +40,7 @@ class StringHandler:
 
             # Unicode
             "café",
+            "𠜎",
 
             # Injection patterns
             "<script>",

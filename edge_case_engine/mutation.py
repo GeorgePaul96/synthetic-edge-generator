@@ -9,6 +9,9 @@ class MutationEngine:
 
         for case in test_cases[:50]:
 
+            if len(case) == 0:
+                continue
+
             case = list(case)
 
             index = random.randint(0, len(case) - 1)
@@ -37,9 +40,12 @@ class MutationEngine:
         mutations = []
 
         for case in test_cases[:50]:
-            
+
+            if len(case) == 0:
+                continue
+
             case = list(case)
-            
+
             # Apply N mutations sequentially to the same input
             for _ in range(stack_depth):
                 

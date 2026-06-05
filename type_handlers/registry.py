@@ -1,9 +1,7 @@
-import typing
 from type_handlers.float_handler import FloatHandler
 from type_handlers.integer_handler import IntegerHandler
 from type_handlers.string_handler import StringHandler
 from type_handlers.bool_handler import BoolHandler
-from type_handlers.none_handler import NoneHandler
 
 
 class HandlerRegistry:
