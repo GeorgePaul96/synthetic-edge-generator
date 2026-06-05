@@ -33,6 +33,21 @@ def func_no_raise(x):
     return x * 2
 
 
+@fuzz_contract(allowed_exceptions=(ValueError,))
+def func_mixed_batch(x):
+    """Raises ValueError for even x (allowed), TypeError for odd x (disallowed)."""
+    if x % 2 == 0:
+        raise ValueError("allowed error for even input")
+    else:
+        raise TypeError("disallowed error for odd input")
+
+
+@fuzz_contract(allowed_exceptions=())
+def func_empty_allowed_list(x):
+    """Contract specifies no allowed exceptions — any exception is a crash."""
+    raise ValueError("not in allowed list")
+
+
 def func_no_contract(x):
     """No @fuzz_contract decorator — all exceptions are crashes."""
     raise RuntimeError("bare exception")
@@ -121,21 +136,42 @@ class TestContractFiltering(unittest.TestCase):
     # ------------------------------------------------------------------
     # 6. Mixed batch: allowed + disallowed counted correctly
     # ------------------------------------------------------------------
-    def test_mixed_batch_counts_only_disallowed_as_crashes(self):
-        """When a batch contains both allowed and disallowed exceptions,
-        only the disallowed ones appear as crashes."""
-        # func_raises_allowed always raises ValueError (allowed)
-        # func_raises_disallowed always raises TypeError (disallowed)
-        allowed_results = self.executor.execute(func_raises_allowed, [(i,) for i in range(3)])
-        disallowed_results = self.executor.execute(func_raises_disallowed, [(i,) for i in range(3)])
+    def test_mixed_batch_with_allowed_and_disallowed_exceptions(self):
+        """A single batch where one function raises allowed exceptions (ValueError)
+        on some inputs and disallowed exceptions (TypeError) on others. Only
+        the disallowed exceptions should be recorded as crashes."""
+        # func_mixed_batch raises ValueError (allowed) for even inputs,
+        # and TypeError (disallowed) for odd inputs.
+        test_cases = [(0,), (1,), (2,), (3,), (4,)]  # 0,2,4 are even; 1,3 are odd
+        results = self.executor.execute(func_mixed_batch, test_cases)
 
-        allowed_crashes = [r for r in allowed_results if r.error is not None]
-        disallowed_crashes = [r for r in disallowed_results if r.error is not None]
+        # Filter results
+        crash_results = [r for r in results if r.error is not None]
+        no_crash_results = [r for r in results if r.error is None]
 
-        self.assertEqual(len(allowed_crashes), 0,
-            "Allowed exceptions must not appear in crash list")
-        self.assertEqual(len(disallowed_crashes), 3,
-            "All disallowed exceptions must appear in crash list")
+        # Only 2 should be disallowed (TypeError for odd inputs 1, 3)
+        self.assertEqual(len(crash_results), 2,
+            f"Expected 2 disallowed (TypeError) exceptions as crashes, got {len(crash_results)}")
+        # And 3 should be allowed (ValueError for even inputs 0, 2, 4)
+        self.assertEqual(len(no_crash_results), 3,
+            f"Expected 3 allowed (ValueError) exceptions not as crashes, got {len(no_crash_results)}")
+        # All crash results should be TypeError
+        for crash in crash_results:
+            self.assertIsInstance(crash.error, TypeError,
+                f"Expected TypeError in crash, got {type(crash.error)}")
+
+    # ------------------------------------------------------------------
+    # 7. Empty allowed_exceptions list → all exceptions are crashes
+    # ------------------------------------------------------------------
+    def test_empty_allowed_exceptions_list_records_all_as_crashes(self):
+        """A function with allowed_exceptions=() (empty tuple) should record
+        all exceptions as crashes, since nothing is allowed."""
+        result = self._run_single(func_empty_allowed_list)
+        self.assertIsNotNone(result.error,
+            "Exception from empty allowed_exceptions must be recorded as crash")
+        self.assertIsInstance(result.error, ValueError)
+        self.assertEqual(result.severity, "HIGH",
+            "Exception from empty allowed_exceptions must have HIGH severity")
 
 
 if __name__ == "__main__":
