@@ -2,3 +2,4 @@ corpus/crashes.json
 corpus/inputs.json
 __pycache__/
 *.pyc
+synthedge_findings.py

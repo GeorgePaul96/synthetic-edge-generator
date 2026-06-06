@@ -1,3 +1,4 @@
+import math
 import os
 from typing import Any, Dict, List
 
@@ -40,10 +41,26 @@ class PytestExporter:
             lines.append("")
 
         content = "\n".join(lines)
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             f.write(content)
 
         return len(crashes)
+
+    @staticmethod
+    def _safe_repr(value) -> str:
+        """Repr a value so it's valid Python in a generated file."""
+        if isinstance(value, float):
+            if math.isnan(value):
+                return "float('nan')"
+            if math.isinf(value):
+                return "float('inf')" if value > 0 else "float('-inf')"
+        return repr(value)
+
+    @staticmethod
+    def _safe_tuple_repr(inp) -> str:
+        """Repr an input tuple with all floats safely rendered."""
+        parts = [PytestExporter._safe_repr(v) for v in inp]
+        return f"({', '.join(parts)},)" if len(parts) == 1 else f"({', '.join(parts)})"
 
     @staticmethod
     def _build_header(module_name: str, module_path: str) -> list:
@@ -108,17 +125,22 @@ class PytestExporter:
         safe_func = "".join(c if c.isalnum() or c == "_" else "_" for c in safe_func)
         test_name = f"test_synthedge_{safe_func}_{safe_exc}_{index:03d}"
 
-        # Repr the input safely
+        # Repr the input safely (handles nan/inf so generated code is valid Python)
         if not isinstance(minimized_input, tuple):
             minimized_input = tuple(minimized_input) if hasattr(minimized_input, "__iter__") else (minimized_input,)
-        input_repr = repr(minimized_input)
+        inp = minimized_input
+        input_repr = PytestExporter._safe_tuple_repr(inp)
+
+        # Sanitize strings embedded in the docstring to avoid triple-quote injection
+        safe_input_repr = input_repr.replace('"""', '\\"\\"\\"')
+        safe_error = error_str[:120].replace('"""', '\\"\\"\\"')
 
         lines = [
             f"def {test_name}():",
             f'    """',
             f'    Found by synthedge: {func_name or "unknown function"} raises {exc_type}',
-            f'    Input: {input_repr}',
-            f'    Error: {error_str[:120]}',
+            f'    Input: {safe_input_repr}',
+            f'    Error: {safe_error}',
             f'    """',
             f"    with pytest.raises({exc_type}):",
             f"        {safe_func}(*{input_repr})",
@@ -140,7 +162,4 @@ class PytestExporter:
                 candidate_str = f"{type(e).__name__}: {e}"
                 if candidate_str == error_str:
                     return name
-            except Exception:
-                pass
-        # Fall back to first registered function
-        return next(iter(function_registry), "unknown")
+        return "unknown"

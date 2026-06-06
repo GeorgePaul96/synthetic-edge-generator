@@ -123,7 +123,7 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
     # Export crashes as a pytest file next to the target module
     output_path = os.path.join(module_dir, "synthedge_findings.py")
     n_written = PytestExporter.export(
-        crashes=deduped if raw_crashes else [],
+        crashes=deduped,
         module_path=module_path,
         function_registry=function_registry,
         output_path=output_path,

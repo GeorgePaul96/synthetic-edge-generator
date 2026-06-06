@@ -182,5 +182,114 @@ class TestPytestExporterFunctionNames(unittest.TestCase):
                     )
 
 
+class TestPytestExporterNanInf(unittest.TestCase):
+    """Ensure nan/inf inputs produce valid Python in the generated file."""
+
+    def _nan_func(self, x):
+        """Raises ValueError for nan input."""
+        import math
+        if math.isnan(x):
+            raise ValueError("nan not allowed")
+        return x
+
+    def test_nan_input_repr_is_valid_python(self):
+        """input_repr for a float nan must contain float('nan'), not the bare token nan."""
+        import math
+
+        def nan_raiser(x):
+            if math.isnan(x):
+                raise ValueError("nan not allowed")
+            return x
+
+        registry = {"nan_raiser": nan_raiser}
+        crash = {
+            "input": [float("nan")],
+            "error": "ValueError: nan not allowed",
+            "severity": "medium",
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out = os.path.join(tmpdir, "findings.py")
+            PytestExporter.export([crash], "operations.py", registry, out)
+            with open(out, encoding="utf-8") as f:
+                source = f.read()
+
+        # Must contain the safe form
+        self.assertIn("float('nan')", source, "nan should be rendered as float('nan')")
+        # Must NOT contain bare 'nan' as a Python token in the actual function call line.
+        # We check only the line that starts with the function-call indentation (the
+        # `func(*(...))` line), because comments and docstrings may contain 'nan' as
+        # natural-language text and that's fine.
+        import re
+        call_line = next(
+            (ln for ln in source.splitlines() if ln.strip().startswith("nan_raiser(*")),
+            "",
+        )
+        bare_nan_in_call = re.search(r"(?<!['\w])nan(?!['\w])", call_line)
+        self.assertIsNone(
+            bare_nan_in_call,
+            f"Bare 'nan' token found in call line: {call_line!r}\n\nFull source:\n{source}",
+        )
+
+        # Must be valid Python
+        try:
+            compile(source, out, "exec")
+        except SyntaxError as e:
+            self.fail(f"Generated file with nan input has SyntaxError: {e}\n\nSource:\n{source}")
+
+    def test_inf_input_repr_is_valid_python(self):
+        """input_repr for float inf must contain float('inf'), not bare inf."""
+        import math
+
+        def inf_raiser(x):
+            if math.isinf(x):
+                raise ValueError("inf not allowed")
+            return x
+
+        registry = {"inf_raiser": inf_raiser}
+        crash = {
+            "input": [float("inf")],
+            "error": "ValueError: inf not allowed",
+            "severity": "medium",
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out = os.path.join(tmpdir, "findings.py")
+            PytestExporter.export([crash], "operations.py", registry, out)
+            with open(out, encoding="utf-8") as f:
+                source = f.read()
+
+        self.assertIn("float('inf')", source, "inf should be rendered as float('inf')")
+        try:
+            compile(source, out, "exec")
+        except SyntaxError as e:
+            self.fail(f"Generated file with inf input has SyntaxError: {e}\n\nSource:\n{source}")
+
+    def test_neg_inf_input_repr_is_valid_python(self):
+        """input_repr for float -inf must contain float('-inf')."""
+        import math
+
+        def neg_inf_raiser(x):
+            if math.isinf(x) and x < 0:
+                raise ValueError("neg inf not allowed")
+            return x
+
+        registry = {"neg_inf_raiser": neg_inf_raiser}
+        crash = {
+            "input": [float("-inf")],
+            "error": "ValueError: neg inf not allowed",
+            "severity": "medium",
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out = os.path.join(tmpdir, "findings.py")
+            PytestExporter.export([crash], "operations.py", registry, out)
+            with open(out, encoding="utf-8") as f:
+                source = f.read()
+
+        self.assertIn("float('-inf')", source, "neg inf should be rendered as float('-inf')")
+        try:
+            compile(source, out, "exec")
+        except SyntaxError as e:
+            self.fail(f"Generated file with -inf input has SyntaxError: {e}\n\nSource:\n{source}")
+
+
 if __name__ == "__main__":
     unittest.main()
