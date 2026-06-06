@@ -133,28 +133,39 @@ class TestInputMinimizer(unittest.TestCase):
 
     def test_minimize_finds_shorter_input(self):
         """minimize() finds a shorter first argument that still triggers the crash."""
-        original = ("a very long string that is not None", 99999)
-        from edge_case_engine.deduplicator import CrashDeduplicator
-        expected_sig = CrashDeduplicator.signature("TypeError: 'NoneType' cannot be added")
+        # Capture the actual error message format so expected_sig matches what
+        # minimize() computes internally (str(e), no class-name prefix).
+        try:
+            self._crashing_func(None, 1)
+        except Exception as e:
+            expected_sig = CrashDeduplicator.signature(str(e))
+
+        original = (None, 99999)
         result = InputMinimizer.minimize(self._crashing_func, original, expected_sig)
-        # None triggers the same crash and has size 4 ("None") vs long string
-        self.assertLessEqual(
+        # None triggers the same crash; 99999 can be replaced by 0/1/-1/etc.
+        # Minimization must actually find a shorter input, not just return the original.
+        self.assertNotEqual(result, original, "Minimizer should have found a shorter input")
+        self.assertLess(
             InputMinimizer._input_size(result),
             InputMinimizer._input_size(original),
         )
 
     def test_minimize_returns_original_when_no_simpler_input_found(self):
         """When no candidate triggers the same crash, original is returned."""
-        def very_specific_crash(a, b):
-            if a == 999 and b == 888:
-                raise RuntimeError("specific crash only on 999,888")
-            return a + b
+        def specific_crash(x, y):
+            if x == "unique_sentinel_value_xyz" and y == "abc":
+                raise RuntimeError("only this triggers it")
 
-        original = (999, 888)
-        from edge_case_engine.deduplicator import CrashDeduplicator
-        expected_sig = CrashDeduplicator.signature("RuntimeError: specific crash only on <N>,<N>")
-        # The generated candidates use simple values, none of which is 999 or 888
-        result = InputMinimizer.minimize(very_specific_crash, original, expected_sig)
+        # Capture actual error message format
+        try:
+            specific_crash("unique_sentinel_value_xyz", "abc")
+        except Exception as e:
+            expected_sig = CrashDeduplicator.signature(str(e))
+
+        original = ("unique_sentinel_value_xyz", "abc")
+        # None of the simple candidate values match "unique_sentinel_value_xyz",
+        # so the minimizer cannot find a shorter crashing input.
+        result = InputMinimizer.minimize(specific_crash, original, expected_sig)
         self.assertEqual(result, original)
 
     def test_input_size_metric(self):

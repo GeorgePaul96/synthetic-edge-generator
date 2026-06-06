@@ -1,5 +1,5 @@
 import re
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 
 
 class CrashDeduplicator:
@@ -31,11 +31,8 @@ class CrashDeduplicator:
 
         for crash in crashes:
             error_str = str(crash.get("error", ""))
-            # Extract error type prefix (before the first colon)
-            parts = error_str.split(":", 1)
-            error_type = parts[0].strip() if len(parts) > 1 else error_str
             sig = CrashDeduplicator.signature(error_str)
-            key = f"{error_type}::{sig}"
+            key = sig
 
             if key not in seen:
                 seen[key] = crash

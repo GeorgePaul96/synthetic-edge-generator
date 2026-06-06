@@ -97,7 +97,11 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
                     if verbose:
                         print(f"  New path (energy={new_energy:.1f})")
                 if result.error is not None:
-                    corpus.record_crash(result.input, str(result.error), result.severity)
+                    corpus.record_crash(
+                        result.input,
+                        f"{type(result.error).__name__}: {result.error}",
+                        result.severity,
+                    )
                     crashes_found += 1
 
             iterations_done = i + 1
