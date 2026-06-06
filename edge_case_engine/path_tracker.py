@@ -58,7 +58,6 @@ class PathTracker:
             if self._should_track(filename):
                 self.current_path.add(f"{filename}:{frame.f_lineno}")
         return self._settrace_callback
-        return self._settrace_callback
 
     def start(self):
         self.current_path.clear()
