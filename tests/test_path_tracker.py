@@ -9,6 +9,8 @@ To keep path IDs stable across two "identical" runs, all tracked function
 calls are routed through a single fixed helper (_tracked_call) so that the
 call-site line number is always the same.
 """
+import json
+import os
 import unittest
 from edge_case_engine.path_tracker import PathTracker
 
@@ -82,12 +84,36 @@ class TestPathTrackerTracking(unittest.TestCase):
                          "current_path was not cleared between runs")
 
     def test_no_stdlib_lines_in_path(self):
-        _tracked_call(self.tracker, _simple_add, 1, 2)
+        """Stdlib calls inside the tracked window must not appear in current_path.
+
+        json.dumps and os.path.join are both pure-stdlib; if the filter is
+        working they must be absent from the recorded path entries even though
+        they are actually executed during the tracked window.
+        """
+        def _stdlib_heavy():
+            # Explicitly exercise stdlib so the filter has real work to do.
+            json.dumps({"key": [1, 2, 3]})
+            os.path.join("a", "b", "c")
+
+        _tracked_call(self.tracker, _stdlib_heavy)
+        # Sanity-check: tracker did record *something* (the test helper lines)
+        self.assertGreater(len(self.tracker.current_path), 0,
+                           "current_path is empty — tracking did not fire at all")
         for entry in self.tracker.current_path:
-            self.assertNotIn("lib/python", entry,
+            norm = os.path.normcase(entry)
+            # Old-style checks (kept for non-Windows installs that do use these paths)
+            self.assertNotIn("lib/python", norm,
                              f"stdlib line leaked into path: {entry}")
-            self.assertNotIn("lib\\python", entry,
+            self.assertNotIn("lib\\python", norm,
                              f"stdlib line leaked into path: {entry}")
+            # Verify no json or posixpath / ntpath stdlib module lines appear
+            self.assertNotIn("json", norm,
+                             f"stdlib json line leaked into path: {entry}")
+            # ntpath / posixpath are the os.path implementations
+            self.assertNotIn("ntpath", norm,
+                             f"stdlib ntpath line leaked into path: {entry}")
+            self.assertNotIn("posixpath", norm,
+                             f"stdlib posixpath line leaked into path: {entry}")
 
     def test_no_site_packages_in_path(self):
         _tracked_call(self.tracker, _simple_add, 1, 2)
