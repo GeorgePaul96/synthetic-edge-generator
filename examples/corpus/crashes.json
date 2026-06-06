@@ -1,0 +1,30 @@
+[
+  {
+    "input": [
+      0
+    ],
+    "error": "AttributeError: 'int' object has no attribute 'strip'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string"
+    ],
+    "error": "ValueError: invalid literal for int() with base 10: 'string'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      "string"
+    ],
+    "error": "ValueError: could not convert string to float: 'string'",
+    "severity": "HIGH"
+  },
+  {
+    "input": [
+      NaN
+    ],
+    "error": "ValueError: cannot convert float NaN to integer",
+    "severity": "HIGH"
+  }
+]
