@@ -12,6 +12,7 @@ from edge_case_engine.corpus import CorpusManager
 from edge_case_engine.scheduler import PowerScheduler
 from edge_case_engine.deduplicator import CrashDeduplicator
 from type_handlers.registry import HandlerRegistry
+from synthedge.exporter import PytestExporter
 
 
 def load_module_from_path(path: str) -> types.ModuleType:
@@ -110,10 +111,25 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
 
     # Deduplication pass — collapse identical crashes to their minimal representative
     raw_crashes = corpus.get_crashes()
+    deduped = []
     if raw_crashes:
         deduped = CrashDeduplicator.deduplicate(raw_crashes)
         corpus.write_deduplicated_crashes(deduped)
         print(f"\nDeduplication: {len(raw_crashes)} crashes → {len(deduped)} unique")
+
+    # Build function registry for the exporter
+    function_registry = {t.name: t.function for t in targets}
+
+    # Export crashes as a pytest file next to the target module
+    output_path = os.path.join(module_dir, "synthedge_findings.py")
+    n_written = PytestExporter.export(
+        crashes=deduped if raw_crashes else [],
+        module_path=module_path,
+        function_registry=function_registry,
+        output_path=output_path,
+    )
+    if n_written > 0:
+        print(f"Pytest file written: {output_path} ({n_written} test cases)")
 
     return summary
 
