@@ -1,0 +1,44 @@
+# .claudeignore — paths Claude Code should not scan or read.
+#
+# EFFECTIVENESS NOTE: Claude Code's search (ripgrep-based Grep/Glob) honors .gitignore
+# automatically, so .gitignore is what actually reduces scanning. This file documents intent
+# and is honored by tooling that supports it. For a hard read-block, add Read(deny) rules in
+# .claude/settings.local.json. Keep this roughly in sync with .gitignore.
+
+# --- Generated runtime output (machine-written, not source) ---
+corpus/inputs.json            # generated input corpus, regenerated on every run
+corpus/crashes.json           # generated (deduplicated) crash log
+synthedge_findings.py         # generated pytest reproducers
+examples/synthedge_findings.py
+# (examples/corpus/*.json is a small committed showcase the README cites — intentionally NOT ignored)
+
+# --- Python build / cache artifacts ---
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Launch marketing copy (not technical) ---
+docs/show_hn.md
+docs/reddit_post.md
+docs/launch_checklist.md
+
+# --- Local Claude / editor / VCS / OS ---
+.claude/worktrees/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Logs / temp ---
+*.log
+*.tmp
+tmp/
+.cache/
