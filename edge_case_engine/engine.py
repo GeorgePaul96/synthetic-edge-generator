@@ -1,30 +1,37 @@
-from edge_case_engine.combinatorial import CombinatorialGenerator
-from edge_case_engine.mutation import MutationEngine
+import random
+
+from edge_case_engine.recipe import Recipe, materialize
+from edge_case_engine.mutators.registry import MutatorRegistry
 
 
 class EdgeCaseEngine:
-
     def __init__(self):
+        self.mutation = MutatorRegistry()
 
-        self.combinatorial = CombinatorialGenerator()
-        self.mutation = MutationEngine()
+    def _param_recipe(self, handler, master_rng, budget):
+        seed = master_rng.getrandbits(64)
+        return Recipe(descriptor=handler.descriptor(), seed=seed,
+                      budget=budget.to_dict(), lineage=[])
 
-    def generate(self, handlers):
+    def generate_seeds(self, handlers, master_rng, budget, n_random=20):
+        """Produce (input_tuple, [Recipe per param]) seeds.
 
-        handler_cases = []
+        Strategy: n_random sampled combinations, one fresh recipe per parameter.
+        Each recipe replays independently from its own per-parameter seed.
+        """
+        seeds = []
+        seen = set()
 
-        for handler in handlers:
+        def add(recipes):
+            inp = tuple(materialize(r) for r in recipes)
+            key = repr(inp)
+            if key in seen:
+                return
+            seen.add(key)
+            seeds.append((inp, recipes))
 
-            cases = handler.generate_edge_cases()
-            handler_cases.append(cases)
+        for _ in range(n_random):
+            recipes = [self._param_recipe(h, master_rng, budget) for h in handlers]
+            add(recipes)
 
-        combinations = self.combinatorial.generate(handler_cases)
-
-        mutations = self.mutation.mutate(combinations)
-
-        all_cases = combinations + mutations
-
-        # Deduplicate
-        unique_cases = list(set(all_cases))
-
-        return unique_cases
+        return seeds
