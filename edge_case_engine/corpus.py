@@ -3,10 +3,17 @@ import os
 import hashlib
 import random
 
+from edge_case_engine.codec import encode, decode, values_equal
+from edge_case_engine.recipe import Recipe, materialize
+
+
+class CorpusIntegrityError(Exception):
+    """Raised when a stored recipe does not replay to its cached input."""
+
 
 class CorpusManager:
 
-    def __init__(self, corpus_dir="corpus"):
+    def __init__(self, corpus_dir="corpus", root=None):
 
         self.corpus_dir = corpus_dir
         self.inputs_file = os.path.join(corpus_dir, "inputs.json")
@@ -18,6 +25,13 @@ class CorpusManager:
         self.interesting_inputs = []
 
         self._load_existing_inputs()
+
+        # ---- v2 envelope store (.synthedge/) ----
+        self.root = root or ".synthedge"
+        self._interesting_path = os.path.join(self.root, "corpus", "interesting.jsonl")
+        self._crashes_path = os.path.join(self.root, "crashes", "crashes.jsonl")
+        os.makedirs(os.path.dirname(self._interesting_path), exist_ok=True)
+        os.makedirs(os.path.dirname(self._crashes_path), exist_ok=True)
 
     # -------------------------
     # Internal
@@ -113,3 +127,52 @@ class CorpusManager:
         """Overwrite crashes.json with the given (deduplicated) list."""
         with open(self.crashes_file, "w") as f:
             json.dump(crashes, f, indent=2, default=str)
+
+    # -------------------------
+    # v2 envelope API (recipe-based, integrity-checked)
+    # -------------------------
+
+    def make_envelope(self, recipe: Recipe, input_value, artifacts=None) -> dict:
+        return {
+            "version": 1,
+            "seed": recipe.seed,
+            "recipe": recipe.to_dict(),
+            "input": encode(input_value),
+            "artifacts": artifacts or {"output": None, "exception": None, "coverage": None},
+        }
+
+    def _append_jsonl(self, path, env):
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(env) + "\n")
+
+    def save_interesting(self, env):
+        self._append_jsonl(self._interesting_path, env)
+
+    def save_crash(self, env):
+        self._append_jsonl(self._crashes_path, env)
+
+    def load_interesting(self):
+        return self._load_checked(self._interesting_path)
+
+    def load_crashes_v2(self):
+        return self._load_checked(self._crashes_path)
+
+    def _load_checked(self, path):
+        if not os.path.exists(path):
+            return []
+        out = []
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                env = json.loads(line)
+                recipe = Recipe.from_dict(env["recipe"])
+                replayed = materialize(recipe)
+                cached = decode(env["input"])
+                if not values_equal(replayed, cached):
+                    raise CorpusIntegrityError(
+                        f"recipe replay != cached input (seed={recipe.seed})"
+                    )
+                out.append(env)
+        return out
