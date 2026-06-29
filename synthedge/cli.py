@@ -4,14 +4,16 @@ import os
 import sys
 import types
 import typing
+import random
 
 from edge_case_engine.engine import EdgeCaseEngine
 from edge_case_engine.executor import FunctionExecutor
 from edge_case_engine.discovery import TargetDiscovery
 from edge_case_engine.corpus import CorpusManager
-from edge_case_engine.scheduler import PowerScheduler
 from edge_case_engine.deduplicator import CrashDeduplicator
-from type_handlers.registry import HandlerRegistry
+from edge_case_engine.budget import GenerationBudget
+from edge_case_engine.recipe import Recipe
+from type_handlers.resolver import TypeResolver
 from synthedge.exporter import PytestExporter
 
 
@@ -27,10 +29,11 @@ def load_module_from_path(path: str) -> types.ModuleType:
     return module
 
 
-def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -> dict:
+def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False, seed=None) -> dict:
     """
-    Fuzz all @fuzz_contract functions in the given module.
-    Returns a summary dict: {target_name: {iterations, crashes_found}}
+    Fuzz all @fuzz_contract functions in the given module using the generation-based engine.
+    Returns a summary dict: {target_name: {iterations, crashes_found}}.
+    Deterministic for a fixed `seed`.
     """
     module = load_module_from_path(module_path)
     targets = TargetDiscovery.discover_modules([module])
@@ -40,97 +43,87 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False) -
         print("Tip: decorate your functions with @fuzz_contract from edge_case_engine.contracts")
         return {}
 
+    if seed is None:
+        seed = random.randrange(2 ** 63)
+    master_rng = random.Random(seed)
+    budget = GenerationBudget()
+
     module_abs = os.path.abspath(module_path)
     module_dir = os.path.dirname(module_abs)
 
     engine = EdgeCaseEngine()
     executor = FunctionExecutor()
-    corpus = CorpusManager(corpus_dir=os.path.join(module_dir, "corpus"))
-    scheduler = PowerScheduler()
+    corpus = CorpusManager(corpus_dir=os.path.join(module_dir, "corpus"),
+                           root=os.path.join(module_dir, ".synthedge"))
     summary = {}
 
     for target in targets:
         if verbose:
             print(f"\nFuzzing: {target.name}({', '.join(target.parameters)})")
 
-        annotations = {}
         try:
             annotations = typing.get_type_hints(target.function)
         except Exception:
-            pass
+            annotations = {}
 
-        handlers = HandlerRegistry.handlers_for_params(target.parameters, annotations)
-        test_cases = engine.generate(handlers)
-        unique_cases = corpus.add_inputs(test_cases)
+        handlers = [TypeResolver.resolve(annotations.get(p, None)) for p in target.parameters]
+        if not handlers:
+            summary[target.name] = {"iterations": iterations, "crashes_found": 0}
+            continue
 
-        for case in unique_cases:
-            corpus.add_interesting_input(case, coverage_id="seed")
-
-        # If no new unique cases (corpus already seen them all), re-seed from all
-        # generated cases so the fuzzer pool is never empty.
-        if not corpus.get_all_interesting_inputs():
-            for case in test_cases:
-                corpus.add_interesting_input(case, coverage_id="seed")
-
+        pool = engine.generate_seeds(handlers, master_rng, budget,
+                                     n_random=max(5, iterations // 3))
         crashes_found = 0
-        iterations_done = 0
 
-        for i in range(iterations):
-            interesting_pool = corpus.get_all_interesting_inputs()
-            if not interesting_pool:
+        for _ in range(iterations):
+            if not pool:
                 break
+            base_input, base_recipes = pool[master_rng.randrange(len(pool))]
 
-            seed_input, energy = scheduler.choose_next_seed(interesting_pool)
-            stack_depth = scheduler.determine_mutation_stack_depth(energy)
-            mutated_cases = engine.mutation.havoc_mutate([seed_input], stack_depth)
+            h0 = handlers[0]
+            mutator = engine.mutation.choose(h0, base_input[0], master_rng)
+            if mutator is None:
+                continue
+            new_v0, op = mutator.mutate(h0, base_input[0], master_rng, budget, path=[])
+            mutated = (new_v0,) + tuple(base_input[1:])
 
-            if not isinstance(mutated_cases, list):
-                mutated_cases = [mutated_cases]
+            new_recipes = [Recipe.from_dict(base_recipes[0].to_dict())] + list(base_recipes[1:])
+            new_recipes[0].lineage = list(base_recipes[0].lineage) + [op]
 
-            results = executor.execute(target.function, mutated_cases)
-
+            results = executor.execute(target.function, [mutated])
             for result in results:
-                scheduler.update_frequencies(result.coverage_id)
+                exc = (None if result.error is None
+                       else f"{type(result.error).__name__}: {result.error}")
+                env = corpus.make_envelope(new_recipes[0], mutated[0],
+                                           artifacts={"exception": exc,
+                                                      "coverage": result.coverage_id,
+                                                      "output": None})
                 if result.new_path:
-                    new_energy = scheduler.calculate_energy(result.exec_time_ms, result.coverage_id)
-                    corpus.add_interesting_input(result.input, result.coverage_id,
-                                                 energy=new_energy, exec_time_ms=result.exec_time_ms)
-                    if verbose:
-                        print(f"  New path (energy={new_energy:.1f})")
+                    pool.append((mutated, new_recipes))
+                    corpus.save_interesting(env)
                 if result.error is not None:
-                    corpus.record_crash(
-                        result.input,
-                        f"{type(result.error).__name__}: {result.error}",
-                        result.severity,
-                    )
+                    corpus.save_crash(env)
+                    corpus.record_crash(list(mutated), exc, result.severity)
                     crashes_found += 1
 
-            iterations_done = i + 1
+        summary[target.name] = {"iterations": iterations, "crashes_found": crashes_found}
 
-        summary[target.name] = {"iterations": iterations_done, "crashes_found": crashes_found}
-
-    # Deduplication pass — collapse identical crashes to their minimal representative
+    # Deduplicate + export (legacy crash store feeds the pytest exporter)
     raw_crashes = corpus.get_crashes()
     deduped = []
     if raw_crashes:
         deduped = CrashDeduplicator.deduplicate(raw_crashes)
         corpus.write_deduplicated_crashes(deduped)
-        print(f"\nDeduplication: {len(raw_crashes)} crashes → {len(deduped)} unique")
+        print(f"\nDeduplication: {len(raw_crashes)} crashes -> {len(deduped)} unique")
 
-    # Build function registry for the exporter
     function_registry = {t.name: t.function for t in targets}
-
-    # Export crashes as a pytest file next to the target module
     output_path = os.path.join(module_dir, "synthedge_findings.py")
-    n_written = PytestExporter.export(
-        crashes=deduped,
-        module_path=module_path,
-        function_registry=function_registry,
-        output_path=output_path,
-    )
+    n_written = PytestExporter.export(crashes=deduped, module_path=module_path,
+                                      function_registry=function_registry, output_path=output_path)
     if n_written > 0:
         print(f"Pytest file written: {output_path} ({n_written} test cases)")
 
+    print(f"synthedge seed={seed}")
     return summary
 
 
@@ -162,12 +155,15 @@ def main():
                         help="Fuzzing iterations per target (default: 300)")
     parser.add_argument("-v", "--verbose", action="store_true",
                         help="Show new paths as they are discovered")
+    parser.add_argument("--seed", type=int, default=None,
+                        help="Deterministic run seed (default: random)")
 
     args = parser.parse_args()
 
     print(f"synthedge v0.1.0 — fuzzing {args.module}")
     try:
-        summary = run_fuzzer(args.module, iterations=args.iterations, verbose=args.verbose)
+        summary = run_fuzzer(args.module, iterations=args.iterations,
+                             verbose=args.verbose, seed=args.seed)
     except (FileNotFoundError, ValueError) as e:
         sys.exit(f"Error: {e}")
     except (ImportError, Exception) as e:
