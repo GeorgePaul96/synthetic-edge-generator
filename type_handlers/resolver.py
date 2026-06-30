@@ -15,8 +15,10 @@ from type_handlers.tuple_handler import TupleHandler
 from type_handlers.literal_handler import LiteralHandler
 from type_handlers.enum_handler import EnumHandler
 from type_handlers.dataclass_handler import DataclassHandler
+from type_handlers.pydantic_handler import PydanticHandler
 from edge_case_engine.codec import decode as _decode
 from edge_case_engine.classref import ref_to_class
+from edge_case_engine._pydantic import is_model_type
 
 _NONE = type(None)
 _SCALARS = {float: FloatHandler, int: IntegerHandler, str: StringHandler, bool: BoolHandler}
@@ -96,6 +98,10 @@ class TypeResolver:
             fields = {f.name: cls.resolve(hints.get(f.name, None), strict)
                       for f in dataclasses.fields(annotation)}
             return DataclassHandler(annotation, fields)
+        if is_model_type(annotation):
+            fields = {n: cls.resolve(f.annotation, strict)
+                      for n, f in annotation.model_fields.items()}
+            return PydanticHandler(annotation, fields)
 
         # unknown annotation
         if strict:
@@ -137,4 +143,8 @@ class TypeResolver:
             cls_obj = ref_to_class(desc["cls"])
             fields = {n: cls.from_descriptor(d) for n, d in desc["fields"].items()}
             return DataclassHandler(cls_obj, fields)
+        if k == "pydantic":
+            cls_obj = ref_to_class(desc["cls"])
+            fields = {n: cls.from_descriptor(d) for n, d in desc["fields"].items()}
+            return PydanticHandler(cls_obj, fields)
         raise ValueError(f"unknown descriptor kind {k!r}")

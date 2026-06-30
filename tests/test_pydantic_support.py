@@ -52,3 +52,16 @@ def test_pydantic_handler_constructs_instance_deterministically():
     assert is_model(v1) and values_equal(v1, v2)
     assert h.type_sig() == "pydantic[Account]"
     assert h.descriptor()["k"] == "pydantic" and "balance" in h.descriptor()["fields"]
+
+
+from type_handlers.resolver import TypeResolver
+
+
+def test_resolver_maps_model_and_roundtrips_descriptor():
+    h = TypeResolver.resolve(Account)
+    assert isinstance(h, PydanticHandler)
+    assert set(h.fields.keys()) == {"name", "balance", "tags", "nickname"}
+    assert TypeResolver.from_descriptor(h.descriptor()).type_sig() == h.type_sig()
+    r = TypeResolver()
+    r.resolve_tracked(Account)
+    assert r.fallback_rate() == 0.0
