@@ -65,3 +65,51 @@ def test_resolver_maps_model_and_roundtrips_descriptor():
     r = TypeResolver()
     r.resolve_tracked(Account)
     assert r.fallback_rate() == 0.0
+
+
+from edge_case_engine.recipe import Recipe, materialize
+
+
+def test_account_recipe_replays_over_many_seeds():
+    h = TypeResolver.resolve(Account)
+    budget = GenerationBudget().to_dict()
+    for seed in range(100):
+        rng = random.Random(seed)
+        recipe = Recipe(h.descriptor(), rng.getrandbits(64), budget, [])
+        a = materialize(recipe)
+        b = materialize(recipe)
+        assert values_equal(a, b)
+        assert values_equal(decode(encode(a)), a)
+
+
+def test_run_fuzzer_mode_a_model_param(tmp_path):
+    from synthedge.cli import run_fuzzer
+    target = tmp_path / "ma.py"
+    target.write_text(
+        "from pydantic import BaseModel\n"
+        "from edge_case_engine.contracts import fuzz_contract\n"
+        "class A(BaseModel):\n"
+        "    x: int\n"
+        "    y: float\n"
+        "@fuzz_contract(allowed_exceptions=(Exception,))\n"
+        "def use(a: A):\n"
+        "    return a.x\n"
+    )
+    summary = run_fuzzer(str(target), iterations=30, seed=1)
+    assert "use" in summary and summary["use"]["iterations"] == 30
+
+
+def test_run_fuzzer_mode_b_model_validate(tmp_path):
+    from synthedge.cli import run_fuzzer
+    target = tmp_path / "mb.py"
+    target.write_text(
+        "from pydantic import BaseModel, ValidationError\n"
+        "from edge_case_engine.contracts import fuzz_contract\n"
+        "class A(BaseModel):\n"
+        "    x: int\n"
+        "@fuzz_contract(allowed_exceptions=(ValidationError, TypeError))\n"
+        "def check(data: dict) -> A:\n"
+        "    return A.model_validate(data)\n"
+    )
+    summary = run_fuzzer(str(target), iterations=30, seed=1)
+    assert "check" in summary and summary["check"]["iterations"] == 30
