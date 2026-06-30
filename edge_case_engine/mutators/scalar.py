@@ -11,5 +11,4 @@ class ScalarMutator(Mutator):
 
     def mutate(self, handler, value, rng, budget, path):
         new_value = rng.choice(_POOL)
-        return new_value, LineageOp(op="scalar.replace", path=list(path),
-                                    args={"value": encode(new_value)})
+        return LineageOp(op="scalar.replace", path=list(path), args={"value": encode(new_value)})

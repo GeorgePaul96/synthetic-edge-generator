@@ -8,32 +8,25 @@ class ListMutator(Mutator):
         return isinstance(value, list)
 
     def mutate(self, handler, value, rng, budget, path):
-        new = list(value)
         op = rng.choice(["insert", "delete", "duplicate", "reverse", "empty"])
         args = {}
         elem_handler = getattr(handler, "elem", None)
         if op == "insert":
-            idx = rng.randint(0, len(new))
+            idx = rng.randint(0, len(value))
             elem = elem_handler.generate(rng, budget.child()) if elem_handler else rng.randint(-1, 1)
-            new.insert(idx, elem)
             args = {"index": idx, "value": encode(elem)}
-        elif op == "delete" and new:
-            idx = rng.randrange(len(new))
-            del new[idx]
-            args = {"index": idx}
-        elif op == "duplicate" and new:
-            idx = rng.randrange(len(new))
-            new.insert(idx, new[idx])
-            args = {"index": idx}
+        elif op == "delete" and value:
+            args = {"index": rng.randrange(len(value))}
+        elif op == "duplicate" and value:
+            args = {"index": rng.randrange(len(value))}
         elif op == "reverse":
-            new.reverse()
+            pass
         elif op == "empty":
-            new = []
-        else:  # delete/duplicate on an empty list -> fall back to inserting None
+            pass
+        else:  # delete/duplicate on an empty list -> insert None at 0
             op = "insert"
-            new.insert(0, None)
             args = {"index": 0, "value": encode(None)}
-        return new, LineageOp(op=f"list.{op}", path=list(path), args=args)
+        return LineageOp(op=f"list.{op}", path=list(path), args=args)
 
 
 class DictMutator(Mutator):
@@ -41,28 +34,21 @@ class DictMutator(Mutator):
         return isinstance(value, dict)
 
     def mutate(self, handler, value, rng, budget, path):
-        new = dict(value)
         key_handler = getattr(handler, "key", None)
         val_handler = getattr(handler, "val", None)
         op = rng.choice(["drop_key", "add_key", "corrupt_value"])
         args = {}
-        keys = list(new.keys())
+        keys = list(value.keys())
         if op == "drop_key" and keys:
-            k = rng.choice(keys)
-            del new[k]
-            args = {"key": encode(k)}
+            args = {"key": encode(rng.choice(keys))}
         elif op == "add_key":
             k = key_handler.generate(rng, budget.child()) if key_handler else "k"
             v = val_handler.generate(rng, budget.child()) if val_handler else 0
-            new[k] = v
             args = {"key": encode(k), "value": encode(v)}
         elif op == "corrupt_value" and keys:
-            k = rng.choice(keys)
             corrupt = rng.choice([None, "synthedge", float("nan")])
-            new[k] = corrupt
-            args = {"key": encode(k), "value": encode(corrupt)}
+            args = {"key": encode(rng.choice(keys)), "value": encode(corrupt)}
         else:  # drop/corrupt on an empty dict -> add a key
             op = "add_key"
-            new["synthedge"] = None
             args = {"key": encode("synthedge"), "value": encode(None)}
-        return new, LineageOp(op=f"dict.{op}", path=list(path), args=args)
+        return LineageOp(op=f"dict.{op}", path=list(path), args=args)

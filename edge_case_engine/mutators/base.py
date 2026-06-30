@@ -3,5 +3,6 @@ class Mutator:
         raise NotImplementedError
 
     def mutate(self, handler, value, rng, budget, path):
-        """Return (new_value, LineageOp). path locates `value` within the root input."""
+        """Return a LineageOp (concrete, encoded effect at `path`). No value is returned;
+        the engine derives the value by applying the op via recipe.apply_lineage_op."""
         raise NotImplementedError
