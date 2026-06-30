@@ -4,6 +4,7 @@ import enum
 import dataclasses
 
 from edge_case_engine.classref import class_to_ref, ref_to_class
+from edge_case_engine._pydantic import is_model
 
 
 def encode(value):
@@ -34,6 +35,11 @@ def encode(value):
             class_to_ref(type(value)),
             {f.name: encode(getattr(value, f.name)) for f in dataclasses.fields(value)},
         ]}
+    if is_model(value):
+        return {"$t": "pydantic", "$v": [
+            class_to_ref(type(value)),
+            {n: encode(getattr(value, n)) for n in type(value).model_fields},
+        ]}
     raise TypeError(f"codec cannot encode {type(value)!r}")
 
 
@@ -57,6 +63,10 @@ def decode(obj):
             ref, field_map = obj["$v"]
             cls = ref_to_class(ref)
             return cls(**{k: decode(v) for k, v in field_map.items()})
+        if t == "pydantic":
+            ref, field_map = obj["$v"]
+            cls = ref_to_class(ref)
+            return cls.model_construct(**{k: decode(v) for k, v in field_map.items()})
         raise ValueError(f"unknown codec tag {t!r}")
     if isinstance(obj, list):
         return [decode(v) for v in obj]
@@ -88,4 +98,6 @@ def values_equal(a, b) -> bool:
     if dataclasses.is_dataclass(a) and not isinstance(a, type):
         return all(values_equal(getattr(a, f.name), getattr(b, f.name))
                    for f in dataclasses.fields(a))
+    if is_model(a):
+        return all(values_equal(getattr(a, n), getattr(b, n)) for n in type(a).model_fields)
     return a == b
