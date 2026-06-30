@@ -33,3 +33,22 @@ def test_values_equal_model_distinguishes_fields():
     c = Account.model_construct(name="a", balance=2.0, tags=[], nickname=None)
     assert values_equal(a, b) is True
     assert values_equal(a, c) is False
+
+
+import random
+from edge_case_engine.budget import GenerationBudget
+from type_handlers.pydantic_handler import PydanticHandler
+from type_handlers.scalars import IntegerHandler, FloatHandler, StringHandler
+from type_handlers.list_handler import ListHandler
+from type_handlers.optional_handler import OptionalHandler
+
+
+def test_pydantic_handler_constructs_instance_deterministically():
+    fields = {"name": StringHandler(), "balance": FloatHandler(),
+              "tags": ListHandler(IntegerHandler()), "nickname": OptionalHandler(StringHandler())}
+    h = PydanticHandler(Account, fields)
+    v1 = h.generate(random.Random(2), GenerationBudget())
+    v2 = h.generate(random.Random(2), GenerationBudget())
+    assert is_model(v1) and values_equal(v1, v2)
+    assert h.type_sig() == "pydantic[Account]"
+    assert h.descriptor()["k"] == "pydantic" and "balance" in h.descriptor()["fields"]
