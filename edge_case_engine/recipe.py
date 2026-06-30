@@ -44,45 +44,62 @@ def materialize_base(recipe: "Recipe"):
     return handler.generate(random.Random(recipe.seed), budget)
 
 
-def apply_lineage_op(value, op):
-    """Apply one LineageOp to the root value (Slice 1: path == [])."""
-    if not isinstance(op, LineageOp):
-        op = LineageOp(**op)
+def _get_node(root, path):
+    """Return the live sub-node at path (traverses list/dict only)."""
+    node = root
+    for seg in path:
+        kind, key = seg[0], seg[1]
+        if kind == "list":
+            node = node[key]
+        else:  # "dict"
+            node = node[decode(key)]
+    return node
+
+
+def _set_node(root, path, new_node):
+    """Set the sub-node at path in place via its parent; path == [] replaces root."""
+    if not path:
+        return new_node
+    parent = _get_node(root, path[:-1])
+    kind, key = path[-1][0], path[-1][1]
+    if kind == "list":
+        parent[key] = new_node
+    else:
+        parent[decode(key)] = new_node
+    return root
+
+
+def _compute_op(op, old_node):
+    """Pure: old node -> new node for one op."""
     name = op.op
     args = op.args
     if name == "scalar.replace":
         return decode(args["value"])
     if name == "list.insert":
-        value = list(value)
-        value.insert(args["index"], decode(args["value"]))
-        return value
+        new = list(old_node); new.insert(args["index"], decode(args["value"])); return new
     if name == "list.delete":
-        value = list(value)
-        del value[args["index"]]
-        return value
+        new = list(old_node); del new[args["index"]]; return new
     if name == "list.duplicate":
-        value = list(value)
-        value.insert(args["index"], value[args["index"]])
-        return value
+        new = list(old_node); new.insert(args["index"], new[args["index"]]); return new
     if name == "list.reverse":
-        value = list(value)
-        value.reverse()
-        return value
+        new = list(old_node); new.reverse(); return new
     if name == "list.empty":
         return []
     if name == "dict.drop_key":
-        value = dict(value)
-        value.pop(decode(args["key"]), None)
-        return value
+        new = dict(old_node); new.pop(decode(args["key"]), None); return new
     if name == "dict.add_key":
-        value = dict(value)
-        value[decode(args["key"])] = decode(args["value"])
-        return value
+        new = dict(old_node); new[decode(args["key"])] = decode(args["value"]); return new
     if name == "dict.corrupt_value":
-        value = dict(value)
-        value[decode(args["key"])] = decode(args["value"])
-        return value
+        new = dict(old_node); new[decode(args["key"])] = decode(args["value"]); return new
     raise ValueError(f"unknown lineage op {name!r}")
+
+
+def apply_lineage_op(root, op):
+    """Apply one LineageOp at op.path (any depth). path == [] is the root case."""
+    if not isinstance(op, LineageOp):
+        op = LineageOp(**op)
+    target = _get_node(root, op.path)
+    return _set_node(root, op.path, _compute_op(op, target))
 
 
 def materialize(recipe: "Recipe"):
