@@ -24,3 +24,13 @@ def test_dataclass_handler_constructs_instance():
     assert isinstance(v1, Point) and values_equal(v1, v2)
     assert h.type_sig() == "dataclass[Point]"
     assert h.descriptor()["k"] == "dataclass" and "x" in h.descriptor()["fields"]
+
+
+def test_dynamic_module_class_is_ref_roundtrippable(tmp_path):
+    from synthedge.cli import load_module_from_path
+    from edge_case_engine.classref import class_to_ref, ref_to_class
+    target = tmp_path / "tgt.py"
+    target.write_text("from dataclasses import dataclass\n@dataclass\nclass Q:\n    a: int\n")
+    module = load_module_from_path(str(target))
+    Q = module.Q
+    assert ref_to_class(class_to_ref(Q)) is Q

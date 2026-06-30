@@ -1,6 +1,7 @@
 import argparse
 import importlib.util
 import os
+import re
 import sys
 import types
 import typing
@@ -17,13 +18,15 @@ from synthedge.exporter import PytestExporter
 
 
 def load_module_from_path(path: str) -> types.ModuleType:
-    """Load a Python file as a module by absolute/relative path."""
-    spec = importlib.util.spec_from_file_location("_synthedge_target", path)
+    """Load a Python file as a module under a stable name == its __name__, so classes
+    defined inside it round-trip through edge_case_engine.classref."""
+    abspath = os.path.abspath(path)
+    mod_name = "_synthedge_target_" + re.sub(r"\W", "_", abspath)
+    spec = importlib.util.spec_from_file_location(mod_name, path)
     if spec is None or spec.loader is None:
         raise ValueError(f"Cannot load module from: {path}")
     module = importlib.util.module_from_spec(spec)
-    module_key = f"_synthedge_target_{os.path.abspath(path)}"
-    sys.modules[module_key] = module
+    sys.modules[mod_name] = module
     spec.loader.exec_module(module)
     return module
 
