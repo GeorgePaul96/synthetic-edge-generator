@@ -8,6 +8,10 @@ from type_handlers.list_handler import ListHandler
 from type_handlers.dict_handler import DictHandler
 from type_handlers.optional_handler import OptionalHandler
 from type_handlers.union_handler import UnionHandler
+from type_handlers.set_handler import SetHandler
+from type_handlers.tuple_handler import TupleHandler
+from type_handlers.literal_handler import LiteralHandler
+from edge_case_engine.codec import decode as _decode
 
 _NONE = type(None)
 _SCALARS = {float: FloatHandler, int: IntegerHandler, str: StringHandler, bool: BoolHandler}
@@ -64,6 +68,16 @@ class TypeResolver:
             inner = (cls.resolve(non_none[0], strict) if len(non_none) == 1
                      else UnionHandler([cls.resolve(a, strict) for a in non_none]))
             return OptionalHandler(inner) if has_none else inner
+        if origin is set:
+            return SetHandler(cls.resolve(args[0], strict) if args else FloatHandler())
+        if origin is tuple:
+            if not args:
+                return TupleHandler([FloatHandler()], variadic=True)
+            if len(args) == 2 and args[1] is Ellipsis:
+                return TupleHandler([cls.resolve(args[0], strict)], variadic=True)
+            return TupleHandler([cls.resolve(a, strict) for a in args], variadic=False)
+        if origin is typing.Literal:
+            return LiteralHandler(list(args))
 
         # unknown annotation
         if strict:
@@ -92,4 +106,11 @@ class TypeResolver:
             return OptionalHandler(cls.from_descriptor(desc["inner"]))
         if k == "union":
             return UnionHandler([cls.from_descriptor(o) for o in desc["options"]])
+        if k == "set":
+            return SetHandler(cls.from_descriptor(desc["elem"]))
+        if k == "tuple":
+            return TupleHandler([cls.from_descriptor(e) for e in desc["elems"]],
+                                variadic=desc["variadic"])
+        if k == "literal":
+            return LiteralHandler([_decode(v) for v in desc["values"]])
         raise ValueError(f"unknown descriptor kind {k!r}")
