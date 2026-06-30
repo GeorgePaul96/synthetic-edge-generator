@@ -1,5 +1,7 @@
 import types
 import typing
+import enum
+import dataclasses
 
 from type_handlers.scalars import (
     FloatHandler, IntegerHandler, StringHandler, BoolHandler, NoneHandler,
@@ -11,7 +13,10 @@ from type_handlers.union_handler import UnionHandler
 from type_handlers.set_handler import SetHandler
 from type_handlers.tuple_handler import TupleHandler
 from type_handlers.literal_handler import LiteralHandler
+from type_handlers.enum_handler import EnumHandler
+from type_handlers.dataclass_handler import DataclassHandler
 from edge_case_engine.codec import decode as _decode
+from edge_case_engine.classref import ref_to_class
 
 _NONE = type(None)
 _SCALARS = {float: FloatHandler, int: IntegerHandler, str: StringHandler, bool: BoolHandler}
@@ -78,6 +83,19 @@ class TypeResolver:
             return TupleHandler([cls.resolve(a, strict) for a in args], variadic=False)
         if origin is typing.Literal:
             return LiteralHandler(list(args))
+        if isinstance(annotation, type) and issubclass(annotation, enum.Enum):
+            return EnumHandler(annotation)
+        if dataclasses.is_dataclass(annotation) and isinstance(annotation, type):
+            try:
+                hints = typing.get_type_hints(annotation)
+            except Exception:
+                if strict:
+                    raise
+                _FallbackCounter.count += 1
+                return FloatHandler()
+            fields = {f.name: cls.resolve(hints.get(f.name, None), strict)
+                      for f in dataclasses.fields(annotation)}
+            return DataclassHandler(annotation, fields)
 
         # unknown annotation
         if strict:
@@ -113,4 +131,10 @@ class TypeResolver:
                                 variadic=desc["variadic"])
         if k == "literal":
             return LiteralHandler([_decode(v) for v in desc["values"]])
+        if k == "enum":
+            return EnumHandler(ref_to_class(desc["cls"]))
+        if k == "dataclass":
+            cls_obj = ref_to_class(desc["cls"])
+            fields = {n: cls.from_descriptor(d) for n, d in desc["fields"].items()}
+            return DataclassHandler(cls_obj, fields)
         raise ValueError(f"unknown descriptor kind {k!r}")

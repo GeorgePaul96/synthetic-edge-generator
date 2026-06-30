@@ -42,3 +42,15 @@ def test_set_tuple_literal_descriptor_roundtrip():
     for ann in [Set[int], Tuple[int, str], Tuple[int, ...], Literal[1, 2, 3]]:
         h = TypeResolver.resolve(ann)
         assert TypeResolver.from_descriptor(h.descriptor()).type_sig() == h.type_sig()
+
+
+def test_resolves_enum_and_dataclass():
+    from tests.user_type_fixtures import Color, Box
+    from type_handlers.enum_handler import EnumHandler
+    from type_handlers.dataclass_handler import DataclassHandler
+    assert isinstance(TypeResolver.resolve(Color), EnumHandler)
+    h = TypeResolver.resolve(Box)
+    assert isinstance(h, DataclassHandler)
+    assert set(h.fields.keys()) == {"label", "size", "tag"}
+    assert TypeResolver.from_descriptor(h.descriptor()).type_sig() == h.type_sig()
+    assert TypeResolver.from_descriptor(TypeResolver.resolve(Color).descriptor()).type_sig() == "Enum[Color]"
