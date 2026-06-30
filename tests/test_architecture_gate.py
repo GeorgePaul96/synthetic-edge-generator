@@ -45,3 +45,60 @@ def test_no_exponential_blowup():
         return 1
 
     assert count(value) <= 200    # accountant + depth cap prevent blow-up
+
+
+# ---------------------------------------------------------------------------
+# Architecture Gate v2 (Slice 2): deep mutation + generics
+# ---------------------------------------------------------------------------
+import copy
+from typing import Set, Tuple, Literal
+from edge_case_engine.navigator import PathNavigator
+from edge_case_engine.recipe import Recipe, apply_lineage_op, _get_node
+from edge_case_engine.mutators.registry import MutatorRegistry
+
+GENERICS_FIXTURE = [Set[int], Tuple[int, str], Tuple[int, ...], Literal["a", "b"],
+                    List[Dict[str, List[int]]]]
+
+
+def test_generics_no_fallback_and_roundtrip():
+    r = TypeResolver()
+    for ann in GENERICS_FIXTURE:
+        r.resolve_tracked(ann)
+    assert r.fallback_rate() == 0.0
+    for ann in GENERICS_FIXTURE:
+        h = TypeResolver.resolve(ann)
+        assert TypeResolver.from_descriptor(h.descriptor()).type_sig() == h.type_sig()
+
+
+def test_live_equals_replay_for_nested_mutation():
+    h = TypeResolver.resolve(List[Dict[str, int]])
+    budget = GenerationBudget()
+    nav = PathNavigator()
+    reg = MutatorRegistry()
+    checked = 0
+    for seed in range(300):
+        rng = random.Random(seed)
+        base_recipe = Recipe(h.descriptor(), rng.getrandbits(64), budget.to_dict(), [])
+        base = materialize(base_recipe)
+        path, h_sub, v_sub = nav.select(h, base, rng)
+        mut = reg.choose(h_sub, v_sub, rng)
+        if mut is None:
+            continue
+        op = mut.mutate(h_sub, v_sub, rng, budget, path)
+        live = apply_lineage_op(copy.deepcopy(base), op)
+        replay = materialize(Recipe(h.descriptor(), base_recipe.seed, budget.to_dict(), [op]))
+        assert values_equal(live, replay)
+        if path:
+            checked += 1
+    assert checked > 0   # we actually exercised some nested-path mutations
+
+
+def test_navigator_soundness_on_nested_fixture():
+    h = TypeResolver.resolve(List[Dict[str, List[int]]])
+    budget = GenerationBudget()
+    nav = PathNavigator(stop_prob=0.3)
+    for seed in range(100):
+        rng = random.Random(seed)
+        value = materialize(Recipe(h.descriptor(), rng.getrandbits(64), budget.to_dict(), []))
+        path, sub_h, sub_v = nav.select(h, value, rng)
+        assert values_equal(_get_node(value, path), sub_v)
