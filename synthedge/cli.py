@@ -12,7 +12,6 @@ from edge_case_engine.discovery import TargetDiscovery
 from edge_case_engine.corpus import CorpusManager
 from edge_case_engine.deduplicator import CrashDeduplicator
 from edge_case_engine.budget import GenerationBudget
-from edge_case_engine.recipe import Recipe
 from type_handlers.resolver import TypeResolver
 from synthedge.exporter import PytestExporter
 
@@ -80,21 +79,16 @@ def run_fuzzer(module_path: str, iterations: int = 300, verbose: bool = False, s
                 break
             base_input, base_recipes = pool[master_rng.randrange(len(pool))]
 
-            h0 = handlers[0]
-            mutator = engine.mutation.choose(h0, base_input[0], master_rng)
-            if mutator is None:
+            step = engine.mutate_step(handlers, base_input, base_recipes, master_rng, budget)
+            if step is None:
                 continue
-            new_v0, op = mutator.mutate(h0, base_input[0], master_rng, budget, path=[])
-            mutated = (new_v0,) + tuple(base_input[1:])
-
-            new_recipes = [Recipe.from_dict(base_recipes[0].to_dict())] + list(base_recipes[1:])
-            new_recipes[0].lineage = list(base_recipes[0].lineage) + [op]
+            mutated, new_recipes, pi = step
 
             results = executor.execute(target.function, [mutated])
             for result in results:
                 exc = (None if result.error is None
                        else f"{type(result.error).__name__}: {result.error}")
-                env = corpus.make_envelope(new_recipes[0], mutated[0],
+                env = corpus.make_envelope(new_recipes[pi], mutated[pi],
                                            artifacts={"exception": exc,
                                                       "coverage": result.coverage_id,
                                                       "output": None})
