@@ -1,8 +1,14 @@
 import base64
 import math
+import enum
+import dataclasses
+
+from edge_case_engine.classref import class_to_ref, ref_to_class
 
 
 def encode(value):
+    if isinstance(value, enum.Enum):       # before int/float/str (IntEnum/StrEnum members)
+        return {"$t": "enum", "$v": [class_to_ref(type(value)), value.name]}
     if isinstance(value, bool):            # bool before int
         return value
     if isinstance(value, float):
@@ -23,6 +29,11 @@ def encode(value):
         return {"$t": "set", "$v": [encode(v) for v in sorted(value, key=repr)]}
     if isinstance(value, dict):
         return {"$t": "dict", "$v": [[encode(k), encode(v)] for k, v in value.items()]}
+    if dataclasses.is_dataclass(value) and not isinstance(value, type):
+        return {"$t": "dataclass", "$v": [
+            class_to_ref(type(value)),
+            {f.name: encode(getattr(value, f.name)) for f in dataclasses.fields(value)},
+        ]}
     raise TypeError(f"codec cannot encode {type(value)!r}")
 
 
@@ -39,6 +50,13 @@ def decode(obj):
             return set(decode(v) for v in obj["$v"])
         if t == "dict":
             return {decode(k): decode(v) for k, v in obj["$v"]}
+        if t == "enum":
+            ref, name = obj["$v"]
+            return ref_to_class(ref)[name]
+        if t == "dataclass":
+            ref, field_map = obj["$v"]
+            cls = ref_to_class(ref)
+            return cls(**{k: decode(v) for k, v in field_map.items()})
         raise ValueError(f"unknown codec tag {t!r}")
     if isinstance(obj, list):
         return [decode(v) for v in obj]
@@ -67,4 +85,7 @@ def values_equal(a, b) -> bool:
         if len(ka) != len(kb) or not all(values_equal(x, y) for x, y in zip(ka, kb)):
             return False
         return all(values_equal(a[x], b[y]) for x, y in zip(ka, kb))
+    if dataclasses.is_dataclass(a) and not isinstance(a, type):
+        return all(values_equal(getattr(a, f.name), getattr(b, f.name))
+                   for f in dataclasses.fields(a))
     return a == b
