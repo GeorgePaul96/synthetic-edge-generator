@@ -102,3 +102,54 @@ def test_navigator_soundness_on_nested_fixture():
         value = materialize(Recipe(h.descriptor(), rng.getrandbits(64), budget.to_dict(), []))
         path, sub_h, sub_v = nav.select(h, value, rng)
         assert values_equal(_get_node(value, path), sub_v)
+
+
+# ---------------------------------------------------------------------------
+# Architecture Gate v3 (Slice 3): Enum + dataclass user types
+# ---------------------------------------------------------------------------
+from tests.user_type_fixtures import Color, Priority, Point, Box
+from edge_case_engine.recipe import Recipe
+
+
+def test_user_types_no_fallback_and_descriptor_roundtrip():
+    r = TypeResolver()
+    for ann in (Color, Priority, Point, Box):
+        r.resolve_tracked(ann)
+    assert r.fallback_rate() == 0.0
+    for ann in (Color, Priority, Point, Box):
+        h = TypeResolver.resolve(ann)
+        assert TypeResolver.from_descriptor(h.descriptor()).type_sig() == h.type_sig()
+
+
+def test_user_type_recipe_replays_including_nan_field():
+    h = TypeResolver.resolve(Box)
+    budget = GenerationBudget().to_dict()
+    for seed in range(200):
+        rng = random.Random(seed)
+        recipe = Recipe(h.descriptor(), rng.getrandbits(64), budget, [])
+        a = materialize(recipe)
+        b = materialize(recipe)
+        assert values_equal(a, b)
+        assert isinstance(a, Box)
+
+
+def test_run_fuzzer_on_dataclass_enum_target(tmp_path):
+    from synthedge.cli import run_fuzzer
+    target = tmp_path / "ut.py"
+    target.write_text(
+        "from dataclasses import dataclass\n"
+        "import enum\n"
+        "from edge_case_engine.contracts import fuzz_contract\n"
+        "class C(enum.Enum):\n"
+        "    A = 1\n"
+        "    B = 2\n"
+        "@dataclass\n"
+        "class P:\n"
+        "    x: int\n"
+        "    y: int\n"
+        "@fuzz_contract(allowed_exceptions=(Exception,))\n"
+        "def handle(p: P, c: C):\n"
+        "    return (p.x, c)\n"
+    )
+    summary = run_fuzzer(str(target), iterations=30, seed=1)
+    assert "handle" in summary and summary["handle"]["iterations"] == 30
