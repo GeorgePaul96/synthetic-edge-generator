@@ -1,13 +1,14 @@
 from edge_case_engine.mutators.scalar import ScalarMutator
 from edge_case_engine.mutators.collection import ListMutator, DictMutator
+from edge_case_engine.mutators.regenerate import RegenerateMutator
 
 
 class MutatorRegistry:
     def __init__(self, mutators=None):
-        # Collection mutators are registered ahead of scalar; choose() picks among
-        # whichever can_mutate the given value.
+        # Collection mutators keep list/dict structural; RegenerateMutator and ScalarMutator
+        # both apply to leaves, so choose() mixes fresh same-type instances with pool scalars.
         self._mutators = mutators if mutators is not None else [
-            ListMutator(), DictMutator(), ScalarMutator(),
+            ListMutator(), DictMutator(), RegenerateMutator(), ScalarMutator(),
         ]
 
     def applicable(self, handler, value):
